@@ -6,30 +6,30 @@ import Link from "next/link";
 const services = [
   {
     num: "01",
-    title: "UI/UX Design",
+    title: "Software Development",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia autem suscipit delectus odio tempore quidem et quam sint.",
+      "Custom software solutions tailored to meet your unique business needs, ensuring efficiency, scalability, and seamless integration with existing systems and processes.",
     href: "/",
   },
   {
     num: "02",
     title: "Web Development",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia autem suscipit delectus odio tempore quidem et quam sint.",
+      "Professional, responsive websites designed to captivate your audience, enhance your online presence, and drive engagement with modern, user-friendly interfaces.",
     href: "/",
   },
   {
     num: "03",
     title: "App Development",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia autem suscipit delectus odio tempore quidem et quam sint.",
+      "Innovative mobile applications that deliver seamless user experiences across all devices, ensuring high performance, security, and scalability for your business.",
     href: "/",
   },
   {
     num: "04",
-    title: "Software Development",
+    title: "UI/UX Design",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia autem suscipit delectus odio tempore quidem et quam sint.",
+      "Intuitive, user-centered designs that enhance usability and provide delightful digital experiences, focusing on aesthetics, functionality, and user satisfaction.",
     href: "/",
   },
 ];

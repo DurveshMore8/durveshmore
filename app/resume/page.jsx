@@ -7,39 +7,42 @@ import {
   FaReact,
   FaFigma,
   FaNodeJs,
+  FaDocker,
+  FaAws,
 } from "react-icons/fa";
 
-import { SiTailwindcss, SiNextdotjs, SiFlutter } from "react-icons/si";
+import {
+  SiTailwindcss,
+  SiNextdotjs,
+  SiFlutter,
+  SiAwselasticloadbalancing,
+} from "react-icons/si";
 
 // about data
 const about = {
   title: "About me",
   description:
-    "Ipsum nostrud laboris magna adipisicing reprehenderit magna magnamagna.",
+    "Contact me for software solutions. Based in Maharashtra, India. Let's create something great!",
   info: [
     {
       fieldName: "Name",
       fieldValue: "Durvesh More",
     },
     {
-      fieldName: "Phone",
-      fieldValue: "9876543210",
+      fieldName: "Email",
+      fieldValue: "durveshmore2003@gmail.com",
     },
     {
       fieldName: "Experience",
-      fieldValue: "12+ Years",
+      fieldValue: "3+ Years",
     },
     {
-      fieldName: "Skype",
-      fieldValue: "durvesh.01",
+      fieldName: "Github",
+      fieldValue: "DurveshMore8",
     },
     {
       fieldName: "Nationality",
       fieldValue: "Indian",
-    },
-    {
-      fieldName: "Email",
-      fieldValue: "durveshmore2003@gmail.com",
     },
     {
       fieldName: "Freelance",
@@ -47,7 +50,7 @@ const about = {
     },
     {
       fieldName: "Languages",
-      fieldValue: "English, Hindi, Marathi",
+      fieldValue: "English",
     },
   ],
 };
@@ -57,12 +60,13 @@ const experience = {
   icon: "/assets/resume/badge.svg",
   title: "My experience",
   description:
-    "Officia aliquip dolore Lorem commodo culpa ullamco adipisicing dolore amet adipisicing.",
+    "Extensive experience in software development, website creation, app building, and delivering high-quality projects.",
   items: [
     {
       company: "Corbin Technology",
       position: "Full Stack Developer",
       duration: "2023 - Present",
+      experience: "11 mos",
     },
   ],
 };
@@ -72,13 +76,8 @@ const education = {
   icon: "/assets/resume/cap.svg",
   title: "My education",
   description:
-    "Officia aliquip dolore Lorem commodo culpa ullamco adipisicing dolore amet adipisicing.",
+    "Educated in IT, with comprehensive training in software development, web development, and application development",
   items: [
-    {
-      institution: "V.G.Vaze College",
-      degree: "MSc, Information Technology",
-      duration: "2023 - Present",
-    },
     {
       institution: "V.G.Vaze College",
       degree: "MSc, Information Technology",
@@ -106,19 +105,11 @@ const education = {
 const skills = {
   title: "My skills",
   description:
-    "Cupidatat fugiat nulla amet nostrud Lorem id sunt consequat voluptate cupidatat aute et.",
+    "Skilled in various programming languages, software development, website creation, and application building",
   skillList: [
     {
-      icon: <FaHtml5 />,
-      name: "html 5",
-    },
-    {
-      icon: <FaCss3 />,
-      name: "css 3",
-    },
-    {
-      icon: <FaJs />,
-      name: "javascript",
+      icon: <SiFlutter />,
+      name: "flutter",
     },
     {
       icon: <FaReact />,
@@ -129,16 +120,40 @@ const skills = {
       name: "next.js",
     },
     {
-      icon: <SiTailwindcss />,
-      name: "tailwind.css",
-    },
-    {
       icon: <FaNodeJs />,
       name: "node.js",
     },
     {
-      icon: <SiFlutter />,
-      name: "flutter",
+      icon: <FaJs />,
+      name: "javascript",
+    },
+    {
+      icon: <FaDocker />,
+      name: "Docker",
+    },
+    {
+      icon: <FaAws />,
+      name: "Amazon Web Services",
+    },
+    {
+      icon: <SiAwselasticloadbalancing />,
+      name: "AWS Elastic Load Balancing",
+    },
+    {
+      icon: <FaHtml5 />,
+      name: "html 5",
+    },
+    {
+      icon: <FaCss3 />,
+      name: "css 3",
+    },
+    {
+      icon: <SiTailwindcss />,
+      name: "tailwind.css",
+    },
+    {
+      icon: <FaFigma />,
+      name: "figma",
     },
   ],
 };
@@ -198,7 +213,9 @@ const Resume = () => {
                           key={index}
                           className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
                         >
-                          <span className="text-accent">{item.duration}</span>
+                          <span className="text-accent">
+                            {item.duration} ({item.experience})
+                          </span>
                           <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
                             {item.position}
                           </h3>
@@ -254,26 +271,28 @@ const Resume = () => {
                     {skills.description}
                   </p>
                 </div>
-                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-[30px]">
-                  {skills.skillList.map((skill, index) => {
-                    return (
-                      <li key={index}>
-                        <TooltipProvider delayDuration={100}>
-                          <Tooltip>
-                            <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
-                              <div className="text-6xl group-hover:text-accent transition-all duration-300">
-                                {skill.icon}
-                              </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p className="capitalize">{skill.name}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <ScrollArea className="h-[400px]">
+                  <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-[30px]">
+                    {skills.skillList.map((skill, index) => {
+                      return (
+                        <li key={index}>
+                          <TooltipProvider delayDuration={100}>
+                            <Tooltip>
+                              <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
+                                <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                  {skill.icon}
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="capitalize">{skill.name}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </ScrollArea>
               </div>
             </TabsContent>
             {/* about */}
@@ -286,19 +305,23 @@ const Resume = () => {
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {about.description}
                 </p>
-                <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
-                  {about.info.map((item, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className="flex items-center justify-center xl:justify-start gap-4"
-                      >
-                        <span className="text-white/60">{item.fieldName}</span>
-                        <span className="text-xl">{item.fieldValue}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <ScrollArea className="h-[400px]">
+                  <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
+                    {about.info.map((item, index) => {
+                      return (
+                        <li
+                          key={index}
+                          className="flex items-center justify-center xl:justify-start gap-4"
+                        >
+                          <span className="text-white/60">
+                            {item.fieldName}
+                          </span>
+                          <span className="text-xl">{item.fieldValue}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </ScrollArea>
               </div>
             </TabsContent>
           </div>

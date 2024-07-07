@@ -18,11 +18,6 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const info = [
   {
-    icon: <FaPhoneAlt />,
-    title: "Phone",
-    description: "9876543210",
-  },
-  {
     icon: <FaEnvelope />,
     title: "Email",
     description: "durveshmore2003@gmail.com",
@@ -30,7 +25,7 @@ const info = [
   {
     icon: <FaMapMarkerAlt />,
     title: "Address",
-    description: "Thane - 400604, Maharashtra",
+    description: "Thane - 400604,\nMaharashtra, India",
   },
 ];
 
@@ -53,8 +48,8 @@ const Contact = () => {
             <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
               <h3 className="text-4xl text-accent">Let&apos;s work together</h3>
               <p className="text-white/60">
-                In tempor culpa ipsum labore exercitation ad in laboris quis
-                reprehenderit. Commodo culpa occaecat duis culpa sit.
+                Contact me for software solutions. Based in Maharashtra, India.
+                Let's create something great!
               </p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,7 +94,9 @@ const Contact = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-white/60">{item.title}</p>
-                      <p className="text-xl">{item.description}</p>
+                      <p className="text-xl whitespace-pre-line">
+                        {item.description}
+                      </p>
                     </div>
                   </li>
                 );
