@@ -13,7 +13,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Durvesh More",
+  title: {
+    default: "Durvesh More",
+    template: "Durvesh More - %s",
+  },
   description: "A passionate Software Developer",
 };
 
