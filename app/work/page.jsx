@@ -44,13 +44,13 @@ const projects = [
   },
   {
     num: "03",
-    category: "frontend",
-    title: "project 3",
+    category: "Frontend",
+    title: "A tours & travels company website",
     description:
-      "Cillum aliquip cillum incididunt eiusmod eiusmod pariatur labore cupidatat ex.",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
+      " Developed a fully responsive static website for a tours and travels company, including features for listing tour packages and safaris, with a contact form for bookings. Completed as a freelance assignment with an emphasis on user experience.",
+    stack: [{ name: "Next.js" }, { name: "React.js" }],
     image: "/assets/work/thumb3.png",
-    live: "",
+    live: "https://www.junglitailsafari.com/",
     github: "",
   },
 ];
