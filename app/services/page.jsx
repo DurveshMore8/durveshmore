@@ -27,9 +27,9 @@ const services = [
   },
   {
     num: "04",
-    title: "UI/UX Design",
+    title: "Backend Development",
     description:
-      "Intuitive, user-centered designs that enhance usability and provide delightful digital experiences, focusing on aesthetics, functionality, and user satisfaction.",
+      "I build robust and scalable backend systems with Node.js and Apollo GraphQL. I specialize in developing secure RESTful APIs, integrating databases, and ensuring efficient data flow for dynamic applications.",
     href: "/",
   },
 ];
