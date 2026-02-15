@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1a2847 50%, #0a1628 100%);
+  color: #e0e7ff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blue-500 rounded-full hover:bg-blue-400;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-linear-to-r from-blue-500 to-cyan-400 text-white rounded-lg font-medium transition-all duration-300 hover:from-blue-600 hover:to-cyan-500 hover:shadow-lg active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 border-2 border-blue-400 text-blue-400 rounded-lg font-medium transition-all duration-300 hover:bg-blue-400 hover:text-slate-900 active:scale-95;
+}
+
+/* Glow effect for accent */
+.glow-text {
+  @apply text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-400;
+}
+
+/* Section title styles */
+.section-title {
+  @apply text-4xl md:text-5xl font-bold mb-12 text-center text-white;
+}
+
+/* Card styles */
+.card {
+  @apply bg-slate-800/60 border border-slate-700 rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:border-blue-500/50 backdrop-blur-sm;
+}
