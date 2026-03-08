@@ -28,8 +28,9 @@ export default function Contact() {
     setError("");
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const response = await fetch(
-        "/api/contact/send-email",
+        `${API_URL}/api/contact/send-email`,
         {
           method: "POST",
           headers: {
