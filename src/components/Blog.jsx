@@ -48,122 +48,111 @@ export default function Blog() {
   };
 
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
+    <section id="blog" className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/40 relative">
+      <div className="absolute top-1/2 left-0 w-[30vw] h-[30vw] bg-cyan-600/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+
+      <div className="relative max-w-7xl mx-auto z-10">
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="section-title"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
         >
-          Latest <span className="glow-text">Blog Posts</span>
-        </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+            Latest <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-blue-500">Insights</span>
+          </h2>
+          <div className="w-24 h-1 bg-linear-to-r from-cyan-400 to-blue-500 mx-auto mt-6 rounded-full"></div>
+        </motion.div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10"
         >
           {loading ? (
             <div className="col-span-full text-center py-12">
-              <p className="text-gray-400">Loading blog posts...</p>
+              <div className="inline-block w-8 h-8 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin"></div>
             </div>
           ) : error ? (
-            <div className="col-span-full text-center py-12">
-              <p className="text-red-400">{error}</p>
+            <div className="col-span-full text-center py-12 bg-red-500/10 border border-red-500/20 rounded-2xl">
+              <p className="text-red-400 font-medium">{error}</p>
             </div>
           ) : blogPosts.length === 0 ? (
             <div className="col-span-full text-center py-12">
-              <p className="text-gray-400">No blog posts found</p>
+              <p className="text-gray-400 text-lg">No blog posts found</p>
             </div>
           ) : (
             blogPosts.map((post) => (
               <motion.article
                 key={post._id || post.id}
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="card overflow-hidden group cursor-pointer"
+                whileHover={{ y: -12 }}
+                className="group flex flex-col bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-[0_20px_40px_rgba(6,182,212,0.15)] transition-all duration-500 h-full"
               >
                 {/* Post Image */}
-                <div className="relative overflow-hidden h-48 mb-4">
+                <div className="relative h-56 shrink-0 overflow-hidden border-b border-slate-700/50">
                   <motion.img
                     src={post.image}
                     alt={post.title}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     className="w-full h-full object-cover"
                   />
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4"
-                  >
-                    <span className="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-6">
+                    <span className="inline-flex self-start px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-bold uppercase tracking-wider rounded-lg backdrop-blur-md mb-2">
                       {post.category}
                     </span>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Post Content */}
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2">
-                  {post.title}
-                </h3>
+                <div className="p-6 md:p-8 flex flex-col flex-1 relative">
+                  <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-300 transition-colors duration-300">
+                    {post.title}
+                  </h3>
 
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                  {post.excerpt}
-                </p>
+                  <p className="text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed flex-1">
+                    {post.excerpt}
+                  </p>
 
-                {/* Meta Information */}
-                <div className="space-y-3 mb-4 pb-4 border-b border-gray-200 dark:border-slate-700">
-                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <User size={16} />
-                    <span>{post.author}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} />
-                      <span>{post.date}</span>
+                  {/* Meta Information */}
+                  <div className="space-y-4 pt-6 border-t border-white/5 mt-auto">
+                    <div className="flex items-center gap-3 text-sm text-gray-400">
+                      <div className="w-8 h-8 rounded-full bg-slate-700/50 flex items-center justify-center flex-shrink-0">
+                        <User size={14} className="text-cyan-400" />
+                      </div>
+                      <span className="font-medium">{post.author}</span>
                     </div>
-                    <span>{post.readTime}</span>
+                    <div className="flex items-center justify-between text-xs text-gray-500 font-medium">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={14} />
+                        <span>{new Date(post.createdAt || post.date).toLocaleDateString()}</span>
+                      </div>
+                      <span className="px-2 py-1 bg-slate-800 rounded-md border border-slate-700/50">{post.readTime} min read</span>
+                    </div>
+                  </div>
+
+                  {/* Read More */}
+                  <div className="mt-6 pt-4 border-t border-white/5 mx-auto w-full">
+                    <motion.a
+                      whileHover={{ x: 5 }}
+                      className="inline-flex items-center gap-2 text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition-colors"
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read Full Article
+                      <ArrowRight size={16} />
+                    </motion.a>
                   </div>
                 </div>
-
-                {/* Read More */}
-                <motion.a
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:gap-3 transition-all"
-                  href={post.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read More
-                  <ArrowRight size={16} />
-                </motion.a>
               </motion.article>
             ))
           )}
         </motion.div>
-
-        {/* View All Button */}
-        {/* <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
-          >
-            View All Articles
-          </motion.button>
-        </motion.div> */}
       </div>
     </section>
   );

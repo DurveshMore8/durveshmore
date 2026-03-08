@@ -1,12 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getExperience } from "../services/api";
 
 export default function Experience() {
   const [experiences, setExperiences] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   useEffect(() => {
     const fetchExperience = async () => {
@@ -33,49 +40,55 @@ export default function Experience() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.2,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0, x: -30, filter: "blur(10px)" },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.6 },
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
     <section
       id="experience"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/60 overflow-hidden border-t border-white/5"
     >
-      <div className="max-w-4xl mx-auto">
-        <motion.h2
+      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+
+      <div className="relative max-w-5xl mx-auto z-10" ref={containerRef}>
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="section-title"
+          className="text-center mb-20"
         >
-          Professional <span className="glow-text">Experience</span>
-        </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+            Professional <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-indigo-400">Experience</span>
+          </h2>
+          <div className="w-24 h-1 bg-linear-to-r from-blue-400 to-indigo-400 mx-auto mt-6 rounded-full"></div>
+        </motion.div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-8"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative space-y-12"
         >
           {loading ? (
             <div className="col-span-full text-center py-12">
-              <p className="text-gray-400">Loading experience...</p>
+              <div className="inline-block w-8 h-8 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
             </div>
           ) : error ? (
-            <div className="col-span-full text-center py-12">
+            <div className="col-span-full text-center py-12 bg-red-500/10 border border-red-500/20 rounded-2xl">
               <p className="text-red-400">{error}</p>
             </div>
           ) : experiences.length === 0 ? (
@@ -83,96 +96,100 @@ export default function Experience() {
               <p className="text-gray-400">No experience found</p>
             </div>
           ) : (
-            experiences.map((exp, index) => (
-              <motion.div
-                key={exp._id || exp.id}
-                variants={itemVariants}
-                className="relative"
-              >
-                {/* Timeline connector */}
-                {index !== experiences.length - 1 && (
-                  <div className="absolute left-8 top-24 w-1 h-24 bg-linear-to-b from-blue-600 to-transparent" />
-                )}
+            <div className="relative">
+              {/* Dynamic Line */}
+              <div className="absolute left-[39px] top-[40px] bottom-0 w-[2px] bg-slate-800 rounded-full">
+                <motion.div
+                  className="w-full bg-linear-to-b from-blue-400 via-indigo-500 to-cyan-400 origin-top rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                  style={{ scaleY: pathLength, height: "100%" }}
+                />
+              </div>
 
-                <div className="flex gap-6">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={exp._id || exp.id}
+                  variants={itemVariants}
+                  className="relative flex gap-8 mb-12 last:mb-0 group"
+                >
                   {/* Timeline dot */}
-                  <motion.div whileHover={{ scale: 1.2 }} className="shrink-0">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white shadow-lg">
-                      <Briefcase size={24} />
-                    </div>
-                  </motion.div>
+                  <div className="shrink-0 relative z-10 pt-2">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="flex items-center justify-center w-[80px] h-[80px] rounded-2xl bg-slate-800/80 backdrop-blur-md border border-slate-700/50 text-blue-400 shadow-xl group-hover:bg-linear-to-br group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:border-transparent transition-all duration-500"
+                    >
+                      <Briefcase size={32} />
+                    </motion.div>
+                  </div>
 
                   {/* Experience card */}
-                  <motion.div whileHover={{ x: 10 }} className="flex-1 card">
-                    <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {exp.position}
-                      </h3>
-                      <span className="text-sm text-blue-600 dark:text-blue-400 font-semibold">
+                  <motion.div
+                    whileHover={{ x: 8 }}
+                    className="flex-1 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-slate-600/50 transition-all duration-500"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-6 border-b border-white/5 pb-6">
+                      <div>
+                        <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 mb-2">
+                          {exp.position}
+                        </h3>
+                        <p className="text-xl text-blue-300/80 font-medium">
+                          {exp.company}
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-300 font-semibold whitespace-nowrap">
                         {exp.duration}
                       </span>
                     </div>
 
-                    <p className="text-lg text-gray-600 dark:text-gray-300 mb-3">
-                      {exp.company}
-                    </p>
-
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-gray-400 leading-relaxed mb-8">
                       {exp.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2.5">
                       {exp.technologies.map((tech) => (
-                        <motion.span
+                        <span
                           key={tech}
-                          whileHover={{ scale: 1.05 }}
-                          className="px-3 py-1 text-xs font-medium bg-cyan-100 dark:bg-cyan-900 text-cyan-600 dark:text-cyan-400 rounded-full"
+                          className="px-4 py-1.5 text-xs font-semibold bg-slate-700/50 text-gray-300 rounded-lg border border-white/5 transition-all duration-300 group-hover:bg-indigo-500/10 group-hover:text-indigo-300 group-hover:border-indigo-500/20"
                         >
                           {tech}
-                        </motion.span>
+                        </span>
                       ))}
                     </div>
                   </motion.div>
-                </div>
-              </motion.div>
-            ))
+                </motion.div>
+              ))}
+            </div>
           )}
         </motion.div>
 
         {/* Skills Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-20 pt-20 border-t border-gray-200 dark:border-slate-700"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, margin: "-50px" }}
+          className="mt-32 pt-16 border-t border-white/5"
         >
-          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-            Key Skills
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-extrabold text-white">
+              Tech Stack & <span className="text-cyan-400">Skills</span>
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              "Flutter",
-              "Node.js",
-              "Azure",
-              "AWS",
-              "System Design",
-              "JavaScript",
-              "TypeScript",
-              "REST APIs",
-              "React",
-              "Git",
-              "MongoDB",
-              "SQL",
-              "PostgreSQL",
-              "Docker",
-              "Tailwind CSS",
-              "Problem Solving",
-            ].map((skill) => (
+              "Flutter", "Node.js", "Azure", "AWS",
+              "System Design", "JavaScript", "TypeScript", "REST APIs",
+              "React", "Git", "MongoDB", "SQL",
+              "PostgreSQL", "Docker", "Tailwind CSS", "Problem Solving",
+            ].map((skill, index) => (
               <motion.div
                 key={skill}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                viewport={{ once: true }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="p-4 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-lg border border-blue-200 dark:border-slate-600 text-center font-semibold text-gray-700 dark:text-gray-300"
+                className="flex items-center justify-center p-5 bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center font-medium text-gray-300 hover:text-white hover:bg-slate-700/60 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300 cursor-default"
               >
                 {skill}
               </motion.div>
