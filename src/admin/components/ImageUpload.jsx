@@ -1,10 +1,15 @@
-import React, { useState, useRef } from "react";
-import { Upload, X, Loader2, Image as ImageIcon, Check } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Upload, X, Loader2, Image as ImageIcon, Check, FileText } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
-export default function ImageUpload({ onUploadSuccess, currentImage, label = "Upload Image" }) {
+export default function ImageUpload({ onUploadSuccess, currentImage, label = "Upload", isDocument = false }) {
     const [isUploading, setIsUploading] = useState(false);
     const [preview, setPreview] = useState(currentImage || null);
+
+    useEffect(() => {
+        setPreview(currentImage || null);
+    }, [currentImage]);
+
     const [error, setError] = useState(null);
     const fileInputRef = useRef(null);
     const { token } = useAuth();
@@ -16,9 +21,16 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
         if (!file) return;
 
         // Basic validation
-        if (!file.type.startsWith('image/')) {
-            setError("Please select an image file.");
-            return;
+        if (isDocument) {
+            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+                setError("Please select an image or PDF file.");
+                return;
+            }
+        } else {
+            if (!file.type.startsWith('image/')) {
+                setError("Please select an image file.");
+                return;
+            }
         }
         if (file.size > 5 * 1024 * 1024) { // 5MB limit
             setError("File size too large. Max 5MB.");
@@ -69,7 +81,14 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
             <div className="relative group">
                 {preview ? (
                     <div className="relative w-full h-48 rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
-                        <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                        {preview.endsWith('.pdf') ? (
+                            <div className="w-full h-full flex flex-col items-center justify-center text-cyan-400 bg-slate-900">
+                                <FileText size={48} />
+                                <span className="mt-2 text-sm max-w-[80%] truncate">PDF Document</span>
+                            </div>
+                        ) : (
+                            <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                        )}
                         <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                             <button
                                 type="button"
@@ -104,7 +123,7 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
                         {isUploading ? (
                             <>
                                 <Loader2 className="animate-spin" size={32} />
-                                <span className="text-sm font-medium">Uploading to Cloudinary...</span>
+                                <span className="text-sm font-medium">Uploading to ImageKit...</span>
                             </>
                         ) : (
                             <>
@@ -113,7 +132,7 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
                                 </div>
                                 <div className="text-center">
                                     <p className="text-sm font-bold">Click to upload</p>
-                                    <p className="text-xs opacity-60">PNG, JPG, WebP up to 5MB</p>
+                                    <p className="text-xs opacity-60">{isDocument ? 'PDF, PNG, JPG up to 5MB' : 'PNG, JPG, WebP up to 5MB'}</p>
                                 </div>
                             </>
                         )}
@@ -124,7 +143,7 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
                     type="file"
                     ref={fileInputRef}
                     onChange={handleFileChange}
-                    accept="image/*"
+                    accept={isDocument ? "image/*,application/pdf" : "image/*"}
                     className="hidden"
                 />
             </div>
@@ -133,7 +152,7 @@ export default function ImageUpload({ onUploadSuccess, currentImage, label = "Up
             {preview && !isUploading && (
                 <div className="flex items-center gap-1.5 text-[10px] text-green-400 font-bold uppercase tracking-wider">
                     <Check size={12} />
-                    <span>Uploaded to Cloudinary</span>
+                    <span>Uploaded to ImageKit</span>
                 </div>
             )}
         </div>

@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import React, { useState } from "react";
+import { useSettings } from "../context/SettingsContext";
 
 export default function Contact() {
+  const { settings } = useSettings();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -110,19 +112,19 @@ export default function Contact() {
               {
                 Icon: Mail,
                 title: "Email",
-                details: "developer.durvesh@gmail.com",
-                href: "mailto:developer.durvesh@gmail.com",
+                details: settings?.contactEmail || "developer.durvesh@gmail.com",
+                href: `mailto:${settings?.contactEmail || "developer.durvesh@gmail.com"}`,
               },
               {
                 Icon: Phone,
                 title: "Phone",
-                details: "+91 91676 69630",
-                href: "tel:+919167669630",
+                details: settings?.contactPhone || "+91 91676 69630",
+                href: `tel:${(settings?.contactPhone || "").replace(/\s/g, '')}`,
               },
               {
                 Icon: MapPin,
                 title: "Location",
-                details: "Thane, Maharashtra, India",
+                details: settings?.location || "Thane, Maharashtra, India",
                 href: "#",
               },
             ].map(({ Icon, title, details, href }) => (

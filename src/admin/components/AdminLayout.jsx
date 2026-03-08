@@ -1,4 +1,4 @@
-import { BookOpen, Briefcase, Code, LayoutDashboard, LogOut } from "lucide-react";
+import { BookOpen, Briefcase, Code, LayoutDashboard, LogOut, Settings as SettingsIcon } from "lucide-react";
 import React from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -19,6 +19,7 @@ export default function AdminLayout() {
         { label: "Experience", path: "/admin/experience", icon: Briefcase },
         { label: "Tech Stack", path: "/admin/skills", icon: Code },
         { label: "Blogs", path: "/admin/blogs", icon: BookOpen },
+        { label: "Settings", path: "/admin/settings", icon: SettingsIcon },
     ];
 
     return (

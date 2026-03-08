@@ -1,7 +1,17 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Mail, Twitter, Globe } from "lucide-react";
+import { useSettings } from "../context/SettingsContext";
+import { useScroll, useTransform, motion } from "framer-motion";
+
+const SOCIAL_ICONS = {
+  Github: Github,
+  Linkedin: Linkedin,
+  Twitter: Twitter,
+  Mail: Mail,
+  Other: Globe
+};
 
 export default function Hero() {
+  const { settings } = useSettings();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
   const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
@@ -18,13 +28,19 @@ export default function Hero() {
     }
   };
 
-  const handleDownloadCV = () => {
-    const link = document.createElement("a");
-    link.href = "/Durvesh More Resume.pdf";
-    link.download = "Durvesh More Resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownloadCV = async () => {
+    if (!settings?.resumeUrl) return;
+
+    try {
+      // ImageKit supports forcing an attachment download natively via query parameters
+      const url = new URL(settings.resumeUrl);
+      url.searchParams.append("ik-attachment", "true");
+      window.open(url.toString(), "_blank");
+    } catch (error) {
+      console.error("Download failed, falling back to new tab:", error);
+      // Fallback
+      window.open(settings.resumeUrl, "_blank");
+    }
   };
 
   const containerVariants = {
@@ -112,11 +128,17 @@ export default function Hero() {
           {/* Subtitle */}
           <motion.div variants={itemVariants}>
             <div className="flex flex-wrap items-center justify-center gap-4 text-lg sm:text-2xl text-cyan-200 mb-8 font-medium tracking-wide">
-              <span>Flutter</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-              <span>Node.js</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-              <span>System Design</span>
+              {settings?.aboutShortcut ? (
+                <span>{settings.aboutShortcut}</span>
+              ) : (
+                <>
+                  <span>Flutter</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                  <span>Node.js</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                  <span>System Design</span>
+                </>
+              )}
             </div>
           </motion.div>
 
@@ -152,34 +174,27 @@ export default function Hero() {
             variants={itemVariants}
             className="flex justify-center gap-4 sm:gap-6"
           >
-            {[
-              {
-                Icon: Github,
-                label: "GitHub",
-                href: "https://github.com/DurveshMore8/",
-              },
-              {
-                Icon: Linkedin,
-                label: "LinkedIn",
-                href: "https://www.linkedin.com/in/durveshmore/",
-              },
-              {
-                Icon: Mail,
-                label: "Mail",
-                href: "mailto:developer.durvesh@gmail.com",
-              },
-            ].map(({ Icon, label, href }) => (
-              <motion.a
-                key={label}
-                href={href}
-                whileHover={{ y: -5, scale: 1.1, backgroundColor: "rgba(34, 211, 238, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 sm:p-4 bg-slate-800/40 backdrop-blur-md border border-slate-700/50 rounded-2xl text-cyan-400 shadow-xl transition-all duration-300 cursor-pointer group"
-                title={label}
-              >
-                <Icon size={22} className="group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300" />
-              </motion.a>
-            ))}
+            {(settings?.socialLinks || [
+              { platform: 'Github', url: 'https://github.com/DurveshMore8/', label: 'GitHub' },
+              { platform: 'Linkedin', url: 'https://www.linkedin.com/in/durveshmore/', label: 'LinkedIn' },
+              { platform: 'Mail', url: 'mailto:developer.durvesh@gmail.com', label: 'Mail' }
+            ]).map((link, index) => {
+              const Icon = SOCIAL_ICONS[link.platform] || SOCIAL_ICONS.Other;
+              return (
+                <motion.a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5, scale: 1.1, backgroundColor: "rgba(34, 211, 238, 0.15)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 sm:p-4 bg-slate-800/40 backdrop-blur-md border border-slate-700/50 rounded-2xl text-cyan-400 shadow-xl transition-all duration-300 cursor-pointer group"
+                  title={link.label}
+                >
+                  <Icon size={22} className="group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300" />
+                </motion.a>
+              );
+            })}
           </motion.div>
         </motion.div>
       </div>

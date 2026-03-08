@@ -51,6 +51,40 @@ export const getSkillById = async (id) => {
   return apiCall(`/skills/${id}`);
 };
 
+// Settings APIs
+export const getSettings = async () => {
+  return apiCall("/settings");
+};
+
+export const updateSettings = async (settingsData) => {
+  try {
+    const token = localStorage.getItem("adminToken");
+    const response = await fetch(`${API_BASE_URL}/settings`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(settingsData),
+    });
+    if (!response.ok) {
+      let errorMsg = "Failed to update settings";
+      try {
+        const errData = await response.json();
+        errorMsg = errData.message || errData.error?.message || errorMsg;
+      } catch (e) {
+        // Ignore json parse error
+      }
+      throw new Error(errorMsg);
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Update Settings Error:", error);
+    throw error;
+  }
+};
+
 export default {
   getProjects,
   getProjectById,
@@ -60,4 +94,6 @@ export default {
   getExperienceById,
   getSkills,
   getSkillById,
+  getSettings,
+  updateSettings,
 };

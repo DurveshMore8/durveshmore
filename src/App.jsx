@@ -18,21 +18,25 @@ import AdminProjects from "./admin/pages/Projects";
 import AdminExperience from "./admin/pages/Experience";
 import AdminSkills from "./admin/pages/Skills";
 import AdminBlogs from "./admin/pages/Blogs";
+import AdminSettings from "./admin/pages/Settings";
+
+import { SettingsProvider } from "./context/SettingsContext";
 
 const PublicPortfolio = () => {
-
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-linear-to-b from-slate-900 via-slate-900 to-slate-800">
-      <Navbar />
-      <main className="flex-grow flex flex-col">
-        <Hero />
-        <Projects />
-        <Experience />
-        <Blog />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <SettingsProvider>
+      <div className="flex flex-col min-h-[100dvh] bg-linear-to-b from-slate-900 via-slate-900 to-slate-800">
+        <Navbar />
+        <main className="flex-grow flex flex-col">
+          <Hero />
+          <Projects />
+          <Experience />
+          <Blog />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </SettingsProvider>
   );
 };
 
@@ -96,6 +100,7 @@ export default function App() {
             <Route path="experience" element={<AdminExperience />} />
             <Route path="skills" element={<AdminSkills />} />
             <Route path="blogs" element={<AdminBlogs />} />
+            <Route path="settings" element={<AdminSettings />} />
             <Route path="*" element={<Navigate to="dashboard" replace />} />
           </Route>
         </Route>
