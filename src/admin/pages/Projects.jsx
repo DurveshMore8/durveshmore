@@ -3,6 +3,7 @@ import { Copy, Edit2, ExternalLink, Github, Plus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { getProjects } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
+import ImageUpload from "../components/ImageUpload";
 
 export default function AdminProjects() {
     const [projects, setProjects] = useState([]);
@@ -267,12 +268,10 @@ export default function AdminProjects() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-400 mb-1">Image URL *</label>
-                                            <input
-                                                type="text" required
-                                                value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                                                placeholder="https://example.com/image.jpg"
-                                                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                                            <ImageUpload
+                                                label="Project Image *"
+                                                currentImage={formData.image}
+                                                onUploadSuccess={(url) => setFormData({ ...formData, image: url })}
                                             />
                                         </div>
 

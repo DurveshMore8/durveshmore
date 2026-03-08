@@ -79,7 +79,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/60 border-t border-white/5"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/60 border-t border-white/5 overflow-hidden"
     >
       <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-indigo-600/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
 

@@ -4,10 +4,16 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html,
 body {
-  background: linear-gradient(135deg, #090e17 0%, #121b30 50%, #050a12 100%);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #090e17;
+}
+
+body {
   color: #e0e7ff;
-  transition: background-color 0.3s ease, color 0.3s ease;
   min-height: 100vh;
 }
 

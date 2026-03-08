@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { getExperience } from "../services/api";
+import { getExperience, getSkills } from "../services/api";
 
 export default function Experience() {
   const [experiences, setExperiences] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const containerRef = useRef(null);
@@ -16,22 +17,27 @@ export default function Experience() {
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   useEffect(() => {
-    const fetchExperience = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await getExperience();
-        setExperiences(Array.isArray(data) ? data : []);
+        const [expData, skillsData] = await Promise.all([
+          getExperience(),
+          getSkills()
+        ]);
+        setExperiences(Array.isArray(expData) ? expData : []);
+        setSkills(Array.isArray(skillsData) ? skillsData : []);
       } catch (err) {
-        console.error("Error fetching experience:", err);
-        setError("Failed to load experience");
+        console.error("Error fetching data:", err);
+        setError("Failed to load content");
         setExperiences([]);
+        setSkills([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchExperience();
+    fetchData();
   }, []);
 
   const containerVariants = {
@@ -191,24 +197,25 @@ export default function Experience() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[
-              "Flutter", "Node.js", "Azure", "AWS",
-              "System Design", "JavaScript", "TypeScript", "REST APIs",
-              "React", "Git", "MongoDB", "SQL",
-              "PostgreSQL", "Docker", "Tailwind CSS", "Problem Solving",
-            ].map((skill, index) => (
-              <motion.div
-                key={skill}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="flex items-center justify-center p-5 bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center font-medium text-gray-300 hover:text-white hover:bg-slate-700/60 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300 cursor-default"
-              >
-                {skill}
-              </motion.div>
-            ))}
+            {skills.length > 0 ? (
+              skills.map((skill, index) => (
+                <motion.div
+                  key={skill._id || skill.id || index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center p-5 bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center font-medium text-gray-300 hover:text-white hover:bg-slate-700/60 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300 cursor-default"
+                >
+                  {skill.name}
+                </motion.div>
+              ))
+            ) : !loading && (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                No skills added yet. Add them in the Admin panel!
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

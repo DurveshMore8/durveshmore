@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Edit2, Eye, Plus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import ImageUpload from "../components/ImageUpload";
 
 export default function AdminBlogs() {
     const [blogs, setBlogs] = useState([]);
@@ -255,8 +256,11 @@ export default function AdminBlogs() {
                                             <input type="text" value={formData.tags} onChange={e => setFormData({ ...formData, tags: e.target.value })} placeholder="React, Coding, 2024" className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500 transition-colors" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-400 mb-1">Feature Image URL</label>
-                                            <input type="url" value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500 transition-colors" />
+                                            <ImageUpload
+                                                label="Feature Image *"
+                                                currentImage={formData.image}
+                                                onUploadSuccess={(url) => setFormData({ ...formData, image: url })}
+                                            />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-400 mb-1">Read Time (minutes)</label>
