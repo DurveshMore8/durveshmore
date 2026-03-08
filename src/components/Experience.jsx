@@ -105,58 +105,73 @@ export default function Experience() {
                 />
               </div>
 
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={exp._id || exp.id}
-                  variants={itemVariants}
-                  className="relative flex gap-8 mb-12 last:mb-0 group"
-                >
-                  {/* Timeline dot */}
-                  <div className="shrink-0 relative z-10 pt-2">
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="flex items-center justify-center w-[80px] h-[80px] rounded-2xl bg-slate-800/80 backdrop-blur-md border border-slate-700/50 text-blue-400 shadow-xl group-hover:bg-linear-to-br group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:border-transparent transition-all duration-500"
-                    >
-                      <Briefcase size={32} />
-                    </motion.div>
-                  </div>
+              {experiences.map((exp, index) => {
+                const formatMonthYear = (dateStr) => {
+                  if (!dateStr) return '';
+                  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                };
 
-                  {/* Experience card */}
+                const duration = `${formatMonthYear(exp.startDate)} - ${exp.isCurrentRole ? 'Present' : formatMonthYear(exp.endDate)}`;
+
+                return (
                   <motion.div
-                    whileHover={{ x: 8 }}
-                    className="flex-1 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-slate-600/50 transition-all duration-500"
+                    key={exp._id || exp.id}
+                    variants={itemVariants}
+                    className="relative flex gap-8 mb-12 last:mb-0 group"
                   >
-                    <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-6 border-b border-white/5 pb-6">
-                      <div>
-                        <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 mb-2">
-                          {exp.position}
-                        </h3>
-                        <p className="text-xl text-blue-300/80 font-medium">
-                          {exp.company}
-                        </p>
-                      </div>
-                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-300 font-semibold whitespace-nowrap">
-                        {exp.duration}
-                      </span>
+                    {/* Timeline dot */}
+                    <div className="shrink-0 relative z-10 pt-2">
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        className="flex items-center justify-center w-[80px] h-[80px] rounded-2xl bg-slate-800/80 backdrop-blur-md border border-slate-700/50 text-blue-400 shadow-xl group-hover:bg-linear-to-br group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white group-hover:border-transparent transition-all duration-500"
+                      >
+                        <Briefcase size={32} />
+                      </motion.div>
                     </div>
 
-                    <p className="text-gray-400 leading-relaxed mb-8">
-                      {exp.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2.5">
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-4 py-1.5 text-xs font-semibold bg-slate-700/50 text-gray-300 rounded-lg border border-white/5 transition-all duration-300 group-hover:bg-indigo-500/10 group-hover:text-indigo-300 group-hover:border-indigo-500/20"
-                        >
-                          {tech}
+                    {/* Experience card */}
+                    <motion.div
+                      whileHover={{ x: 8 }}
+                      className="flex-1 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-slate-600/50 transition-all duration-500"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-6 border-b border-white/5 pb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 mb-2">
+                            {exp.title}
+                          </h3>
+                          <p className="text-xl text-blue-300/80 font-medium">
+                            {exp.company} {exp.location && `· ${exp.location}`}
+                          </p>
+                        </div>
+                        <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-300 font-semibold whitespace-nowrap">
+                          {duration}
                         </span>
-                      ))}
-                    </div>
+                      </div>
+
+                      <p className="text-gray-400 leading-relaxed mb-4">
+                        {exp.description}
+                      </p>
+
+                      {exp.responsibilities && exp.responsibilities.length > 0 && (
+                        <ul className="list-disc list-inside text-gray-400 leading-relaxed mb-8 space-y-1 text-sm">
+                          {exp.responsibilities.map((resp, i) => <li key={i}>{resp}</li>)}
+                        </ul>
+                      )}
+
+                      <div className="flex flex-wrap gap-2.5">
+                        {(exp.skills || []).map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-4 py-1.5 text-xs font-semibold bg-slate-700/50 text-gray-300 rounded-lg border border-white/5 transition-all duration-300 group-hover:bg-indigo-500/10 group-hover:text-indigo-300 group-hover:border-indigo-500/20"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
           )}
         </motion.div>
