@@ -1,0 +1,100 @@
+[
+  {
+    "_id": "69add57c9a5feeff16460f4b",
+    "title": "Enigma Notepad",
+    "description": "EnigmaNotepad is a secure, login-based digital vault that lets you store API keys, secrets, passwords, and private notes with end-to-end encryption — ensuring that only you can access what matters most.",
+    "shortDescription": "",
+    "technologies": [
+      "Next.js",
+      "Tailwind",
+      "MongoDB"
+    ],
+    "image": "https://ik.imagekit.io/durveshmore/portfolio/enigmanotepad_lvbTrds3b.png",
+    "github": "https://github.com/DurveshMore8/enigmanotepad",
+    "demo": "https://enigmanotepad.vercel.app/",
+    "featured": true,
+    "order": 1,
+    "status": "published",
+    "createdAt": "2026-03-08T20:01:00.993Z",
+    "updatedAt": "2026-03-08T20:06:15.738Z",
+    "__v": 0
+  },
+  {
+    "_id": "69add9139a5feeff16460f65",
+    "title": "Interview Bot",
+    "description": "An intelligent interview booth that generates tailored questions, conducts live interviews with speech-to-text conversion, and automatically evaluates your responses to deliver a comprehensive performance score.",
+    "shortDescription": "",
+    "technologies": [
+      "React",
+      "Next.js",
+      "Tailwind"
+    ],
+    "image": "https://ik.imagekit.io/durveshmore/portfolio/interview-bot_I5fzzw3Bw.png",
+    "github": "https://github.com/DurveshMore8/interview-bot",
+    "demo": "https://interview-bot-beta.vercel.app/sign-in",
+    "featured": true,
+    "order": 2,
+    "status": "published",
+    "createdAt": "2026-03-08T20:16:19.963Z",
+    "updatedAt": "2026-03-08T20:16:19.963Z",
+    "__v": 0
+  },
+  {
+    "_id": "69add7e2204964166b7b8f59",
+    "title": "Bloglane",
+    "description": "Bloglane is an AI-powered blog writing platform where you can craft, publish, and share your ideas effortlessly — while tracking reader engagement through likes and comments all in one place.",
+    "shortDescription": "",
+    "technologies": [
+      "React",
+      "Tailwind",
+      "Node.js"
+    ],
+    "image": "https://ik.imagekit.io/durveshmore/portfolio/Screenshot_2026-02-14_230555_suMqvm6Zy.png",
+    "github": "https://github.com/DurveshMore8/Bloglane",
+    "demo": "https://bloglane.vercel.app/",
+    "featured": false,
+    "order": 4,
+    "status": "published",
+    "createdAt": "2026-03-08T20:11:14.944Z",
+    "updatedAt": "2026-03-08T20:11:14.944Z",
+    "__v": 0
+  },
+  {
+    "_id": "69add714441ccd8847aecc4c",
+    "title": "Todo App",
+    "description": "Stay organized and on top of your day with a simple, intuitive to-do app that helps you create, manage, and track your tasks effortlessly.",
+    "shortDescription": "",
+    "technologies": [
+      "React",
+      "Tailwind"
+    ],
+    "image": "https://ik.imagekit.io/durveshmore/portfolio/Screenshot_2026-02-14_230200_a61sbs4Wg.png",
+    "github": "https://github.com/DurveshMore8/TodoApp",
+    "demo": "https://todo-app-inky-eta.vercel.app/",
+    "featured": false,
+    "order": 5,
+    "status": "published",
+    "createdAt": "2026-03-08T20:07:48.731Z",
+    "updatedAt": "2026-03-08T20:07:48.731Z",
+    "__v": 0
+  },
+  {
+    "_id": "69add649b00c43b664e5e7ab",
+    "title": "Weather App",
+    "description": "Stay ahead of the weather with real-time forecasts, hourly updates, and daily conditions — all in a clean, simple interface designed for everyday use.",
+    "shortDescription": "",
+    "technologies": [
+      "React.js",
+      "Tailwind"
+    ],
+    "image": "https://ik.imagekit.io/durveshmore/portfolio/Screenshot_2026-02-14_225854_4jVZX4KJi.png",
+    "github": "https://github.com/DurveshMore8/WeatherApp",
+    "demo": "https://weather-app-seven-vert-88.vercel.app/",
+    "featured": false,
+    "order": 6,
+    "status": "published",
+    "createdAt": "2026-03-08T20:04:25.402Z",
+    "updatedAt": "2026-03-08T20:05:54.534Z",
+    "__v": 0
+  }
+]

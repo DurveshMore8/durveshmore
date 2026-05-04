@@ -1,88 +1,53 @@
-const API_BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api`;
-
-// Helper function to make API calls
-const apiCall = async (endpoint) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch from ${endpoint}`);
-    }
-    const data = await response.json();
-    return data.data || data;
-  } catch (error) {
-    console.error(`API Error (${endpoint}):`, error);
-    throw error;
-  }
-};
+import projectsData from '../data/projects.json';
+import blogsData from '../data/blogs.json';
+import experienceData from '../data/experience.json';
+import skillsData from '../data/skills.json';
+import settingsData from '../data/settings.json';
 
 // Project APIs
 export const getProjects = async () => {
-  return apiCall("/projects");
+  return projectsData;
 };
 
 export const getProjectById = async (id) => {
-  return apiCall(`/projects/${id}`);
+  return projectsData.find(p => p._id === id);
 };
 
 // Blog APIs
 export const getBlogs = async () => {
-  return apiCall("/blogs");
+  return blogsData;
 };
 
 export const getBlogById = async (id) => {
-  return apiCall(`/blogs/${id}`);
+  return blogsData.find(b => b._id === id);
 };
 
 // Experience APIs
 export const getExperience = async () => {
-  return apiCall("/experience");
+  return experienceData;
 };
 
 export const getExperienceById = async (id) => {
-  return apiCall(`/experience/${id}`);
+  return experienceData.find(e => e._id === id);
 };
 
 // Skills APIs
 export const getSkills = async () => {
-  return apiCall("/skills");
+  return skillsData;
 };
 
 export const getSkillById = async (id) => {
-  return apiCall(`/skills/${id}`);
+  return skillsData.find(s => s._id === id);
 };
 
 // Settings APIs
 export const getSettings = async () => {
-  return apiCall("/settings");
+  return settingsData;
 };
 
-export const updateSettings = async (settingsData) => {
-  try {
-    const token = localStorage.getItem("adminToken");
-    const response = await fetch(`${API_BASE_URL}/settings`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(settingsData),
-    });
-    if (!response.ok) {
-      let errorMsg = "Failed to update settings";
-      try {
-        const errData = await response.json();
-        errorMsg = errData.message || errData.error?.message || errorMsg;
-      } catch (e) {
-        // Ignore json parse error
-      }
-      throw new Error(errorMsg);
-    }
-    const data = await response.json();
-    return data.data;
-  } catch (error) {
-    console.error("Update Settings Error:", error);
-    throw error;
-  }
+// Update settings is no longer supported on the static frontend
+export const updateSettings = async () => {
+  throw new Error("Update settings is disabled in static mode.");
 };
 
 export default {

@@ -1,0 +1,37 @@
+{
+  "_id": "69adbe8c2b2ac18a4ce4d757",
+  "resumeUrl": "https://ik.imagekit.io/durveshmore/portfolio/Durvesh_More_Resume_4Jc7HK_ws.pdf",
+  "contactEmail": "developer.durvesh@gmail.com",
+  "contactPhone": "+91 91676 69630",
+  "location": "Thane, Maharashtra, India",
+  "socialLinks": [
+    {
+      "platform": "Github",
+      "url": "https://github.com/DurveshMore8/",
+      "label": "GitHub",
+      "_id": "69adbe8c2b2ac18a4ce4d758"
+    },
+    {
+      "platform": "Linkedin",
+      "url": "https://linkedin.com/in/durveshmore/",
+      "label": "LinkedIn",
+      "_id": "69adbe8c2b2ac18a4ce4d759"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://x.com/Durvesh8403/",
+      "label": "Twitter",
+      "_id": "69adbe8c2b2ac18a4ce4d75a"
+    },
+    {
+      "platform": "Mail",
+      "url": "mailto:developer.durvesh@gmail.com",
+      "label": "Email",
+      "_id": "69adbe8c2b2ac18a4ce4d75b"
+    }
+  ],
+  "aboutShortcut": "Software Architect",
+  "createdAt": "2026-03-08T18:23:08.260Z",
+  "updatedAt": "2026-03-08T19:09:08.383Z",
+  "__v": 0
+}
