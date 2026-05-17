@@ -59,42 +59,4 @@
     "updatedAt": "2026-03-08T20:11:14.944Z",
     "__v": 0
   },
-  {
-    "_id": "69add714441ccd8847aecc4c",
-    "title": "Todo App",
-    "description": "Stay organized and on top of your day with a simple, intuitive to-do app that helps you create, manage, and track your tasks effortlessly.",
-    "shortDescription": "",
-    "technologies": [
-      "React",
-      "Tailwind"
-    ],
-    "image": "https://ik.imagekit.io/durveshmore/portfolio/Screenshot_2026-02-14_230200_a61sbs4Wg.png",
-    "github": "https://github.com/DurveshMore8/TodoApp",
-    "demo": "https://todo-app-inky-eta.vercel.app/",
-    "featured": false,
-    "order": 5,
-    "status": "published",
-    "createdAt": "2026-03-08T20:07:48.731Z",
-    "updatedAt": "2026-03-08T20:07:48.731Z",
-    "__v": 0
-  },
-  {
-    "_id": "69add649b00c43b664e5e7ab",
-    "title": "Weather App",
-    "description": "Stay ahead of the weather with real-time forecasts, hourly updates, and daily conditions — all in a clean, simple interface designed for everyday use.",
-    "shortDescription": "",
-    "technologies": [
-      "React.js",
-      "Tailwind"
-    ],
-    "image": "https://ik.imagekit.io/durveshmore/portfolio/Screenshot_2026-02-14_225854_4jVZX4KJi.png",
-    "github": "https://github.com/DurveshMore8/WeatherApp",
-    "demo": "https://weather-app-seven-vert-88.vercel.app/",
-    "featured": false,
-    "order": 6,
-    "status": "published",
-    "createdAt": "2026-03-08T20:04:25.402Z",
-    "updatedAt": "2026-03-08T20:05:54.534Z",
-    "__v": 0
-  }
 ]
