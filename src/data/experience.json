@@ -9,16 +9,17 @@
     "isCurrentRole": true,
     "description": "Full-Stack Software Developer with hands-on experience across mobile, web, and backend development, specializing in cloud infrastructure management and migration. Delivered end-to-end solutions using Flutter, Node.js, and React/Next.js while leading a critical live application migration from AWS to Azure, ensuring continuity and scalability on Microsoft's cloud ecosystem.",
     "responsibilities": [
-      "Developed cross-platform mobile applications using Flutter and Dart for iOS and Android platforms",
-      "Built and maintained RESTful backend APIs and server-side services using Node.js",
-      "Designed and developed responsive web applications using React.js and Next.js frameworks",
-      "Managed and optimized MongoDB databases including schema design and query performance",
-      "Contributed to system design and architecture decisions for scalable application infrastructure",
-      "Deployed and managed cloud infrastructure and services using both AWS and Azure platforms",
-      "Led and executed the end-to-end live application migration from AWS to Microsoft Azure with zero data loss",
-      "Configured and managed Azure services including compute, storage, and networking components",
-      "Monitored application health and performance post-migration to ensure stability on Azure infrastructure",
-      "Collaborated on end-to-end feature development spanning mobile, web, and backend layers"
+      "Played a key role in cloud infrastructure migration from AWS to Azure, transitioning Cognito → Azure External Entra, Lambda → Azure Functions, API Gateway → Azure API Management, and RDS → Azure Database.",
+      "Architected and implemented a real-time chat feature using WebSockets, owning both the Flutter frontend integration and Node.js backend, enabling seamless buyer-seller communication within the platform.",
+      "Implemented a Visitor Management System (VMS) to streamline company visitor tracking, access management, and operational oversight within the shipping application.",
+      "Developed a Talent Acquisition Portal for a maritime company, digitalizing a paper-based hiring process into a seamless digital workflow using Next.js",
+      "Built a candidate submission portal handling 15+ structured forms, streamlining the end-to-end candidate application and data collection process.",
+      "Developed an Admin Dashboard with hiring pipeline tracking and application status management, enabling HR teams to monitor and manage candidates across multiple hiring stages.",
+      "Built a Wellness Module enabling crew members to report health issues via a forum-based chat system, with real-time response capability for doctors through the admin portal.",
+      "Developed a Communicator Module facilitating structured crew communication around ship joining processes and operational issues, improving internal coordination for maritime teams.",
+      "Led UI revamps and codebase architectural overhauls across multiple projects, implementing modularization, separation of UI and business logic, and BLoC state management to improve scalability and team-wide consistency.",
+      "Onboarded onto a third-party Flutter codebase for a maritime industry application, independently understanding and extending an unfamiliar production codebase to deliver new features.",
+      "Developed and maintained a cross-platform rental marketplace application with distinct Admin (Web) and Buyer (Mobile) interfaces across the full Flutter mobile client"
     ],
     "skills": [
       "Flutter",
@@ -56,13 +57,12 @@
     "isCurrentRole": false,
     "description": "Full-Stack Software Developer with expertise in cross-platform mobile development, web application engineering, and backend systems. Responsible for building and maintaining Flutter mobile apps, React/Next.js web frontends, and Node.js backend services, while contributing to database architecture using MongoDB and cloud infrastructure deployments on AWS.",
     "responsibilities": [
-      "Developed cross-platform mobile applications using Flutter and Dart for iOS and Android platforms",
-      "Built and maintained RESTful backend APIs and server-side services using Node.js",
-      "Designed and developed responsive web applications using React.js and Next.js frameworks",
-      "Managed and optimized MongoDB databases including schema design and query performance",
-      "Contributed to system design and architecture decisions for scalable application infrastructure",
-      "Deployed and managed application services using AWS cloud platforms and services",
-      "Collaborated on end-to-end feature development spanning mobile, web, and backend layers"
+      "Built a Course Management Module enabling instructors to create structured courses with nested module hierarchies, forming the content backbone of the Learning Management System (LMS).",
+      "Developed a comprehensive Assessment Module for the LMS supporting multiple question types (single-select, multi-select, and text-based answers), automated scoring, admin-controlled grading for subjective answers, and downloadable certificates.",
+      "Integrated Razorpay and HDFC Payment Gateways into an e-commerce platform, handling end-to-end payment flow including order initiation, transaction management, and payment confirmation.",
+      "Built core e-commerce modules including Product Management, Cart, Order Management, and Search with category and price-based filtering.",
+      "Involved in AWS deployments using ECR, ECS, and S3, gaining hands-on experience with containerized application deployment and cloud infrastructure management.",
+      "Worked across Flutter, React.js, Next.js, and Node.js in a 15-20 person engineering team, developing strong foundations in full-stack development and cross-platform application architecture."
     ],
     "skills": [
       "Flutter",
